@@ -21,8 +21,8 @@ class AwesomeProject extends Component {
         super();
         this.state = {
             img_url: "https://goo.gl/vRNu5m"
-        }
-        // this.update = this.update.bind(this);
+        };
+        this.update = this.update.bind(this);
     }
 
     update(url) {
