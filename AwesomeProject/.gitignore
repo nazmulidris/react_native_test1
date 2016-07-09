@@ -1,0 +1,15 @@
+local.properties
+
+workspace.xml
+tasks.xml
+
+android/.gradle/
+android/build/
+android/app/build/
+
+*.apk
+*.ap_
+*.dex
+*.class
+
+node_modules/
