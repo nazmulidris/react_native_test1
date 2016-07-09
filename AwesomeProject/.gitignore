@@ -3,6 +3,7 @@ local.properties
 workspace.xml
 tasks.xml
 
+android/.idea/
 android/.gradle/
 android/build/
 android/app/build/
