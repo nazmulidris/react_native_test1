@@ -39,7 +39,7 @@ class AwesomeProject extends Component {
     }
 
     buttonPressed() {
-        ToastAndroid.show("Button is pressed", ToastAndroid.LONG);
+        ToastAndroid.show("YAY! Button is pressed!", ToastAndroid.LONG);
     }
 }
 
