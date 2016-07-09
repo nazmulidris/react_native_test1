@@ -16,7 +16,8 @@ import {
 /**
  * http://stackoverflow.com/questions/29872918/how-to-add-a-button-in-react-native
  */
-var Button = require('react-native-button');
+import Button from 'react-native-button';
+
 
 class AwesomeProject extends Component {
 
@@ -33,7 +34,8 @@ class AwesomeProject extends Component {
                     Shake or press menu button for dev menu
                 </Text>
                 <Button
-                    style={{borderWidth: 1, borderColor: 'blue'}}
+                    containerStyle={styles.buttonContainer}
+                    style={styles.button}
                     onPress={this.buttonPressed}>
                     Press Me!
                 </Button>
@@ -47,6 +49,17 @@ class AwesomeProject extends Component {
 }
 
 const styles = StyleSheet.create({
+    buttonContainer: {
+        padding: 10,
+        borderColor: '#CACACA',
+        borderRadius: 8,
+        backgroundColor: '#CACACA',
+    },
+    button: {
+        textAlignVertical: 'center',
+        fontSize: 20,
+        color: '#03A9F4',
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
