@@ -20,23 +20,46 @@ class AwesomeProject extends Component {
     constructor() {
         super();
         this.state = {
-            img_url: "https://goo.gl/vRNu5m"
+            img_url: "https://goo.gl/vRNu5m",
+            time_str: "Current Time"
         };
-        this.update = this.update.bind(this);
+        this.updateImageURI = this.updateImageURI.bind(this);
     }
 
-    update(url) {
+    updateImageURI(url) {
         this.setState({img_url: url});
     }
 
-    render() {
+    updateTime() {
         let dateFormat = require('dateformat')
         let formattedDate = dateFormat(Date.now(), "dddd, mmmm dS, yyyy, h:MM:ss TT");
+        this.setState({time_str: formattedDate});
+    }
+
+    /**
+     * evaluate the time so that empty string for time doesnt get displayed in screen.
+     * without a call to this method the UI will display "Current Time" at load
+     */
+    componentWillMount() {
+        this.updateTime();
+    }
+
+    /** set a recurring timer to update the time state string */
+    componentDidMount() {
+        this.timer = setInterval(this.updateTime.bind(this), 1000);
+    }
+
+    /** stop the timer when the component is removed */
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
+
+    render() {
 
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
-                    {formattedDate}
+                    {this.state.time_str}
                 </Text>
                 <Text style={styles.instructions}>
                     To get started, edit index.android.js. Shake or press menu button for dev menu
@@ -53,7 +76,7 @@ class AwesomeProject extends Component {
     }
 
     buttonPressed() {
-        this.update("https://goo.gl/B94hp8");
+        this.updateImageURI("https://goo.gl/B94hp8");
         ToastAndroid.show("YAY! Button is pressed!", ToastAndroid.LONG);
     }
 }
