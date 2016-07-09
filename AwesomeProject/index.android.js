@@ -13,6 +13,9 @@ import {
     ToastAndroid
 } from 'react-native';
 
+/**
+ * http://stackoverflow.com/questions/29872918/how-to-add-a-button-in-react-native
+ */
 var Button = require('react-native-button');
 
 class AwesomeProject extends Component {
