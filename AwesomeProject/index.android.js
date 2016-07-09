@@ -61,9 +61,6 @@ class AwesomeProject extends Component {
                 <Text style={styles.welcome}>
                     {this.state.time_str}
                 </Text>
-                <Text style={styles.instructions}>
-                    To get started, edit index.android.js. Shake or press menu button for dev menu
-                </Text>
                 <Image source={{uri: this.state.img_url}} style={styles.image}/>
                 <Button
                     containerStyle={styles.buttonContainer}
@@ -71,6 +68,9 @@ class AwesomeProject extends Component {
                     onPress={this.buttonPressed.bind(this)}>
                     Press Me!
                 </Button>
+                <Text style={[{flex:1},styles.instructions]}>
+                    To get started, edit index.android.js. Shake or press menu button for dev menu
+                </Text>
             </View>
         );
     }
@@ -83,7 +83,7 @@ class AwesomeProject extends Component {
 
 const styles = StyleSheet.create({
     image: {
-        margin: 20,
+        margin: 24,
         width: 150,
         height: 150,
     },
@@ -110,9 +110,11 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     instructions: {
+        marginTop: 24,
         textAlign: 'center',
         color: '#333333',
         marginBottom: 5,
+        backgroundColor: '#DADADA',
     },
 });
 
