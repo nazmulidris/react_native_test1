@@ -17,8 +17,8 @@ import Button from 'react-native-button';
 
 class AwesomeProject extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             img_url: "https://goo.gl/vRNu5m",
             time_str: "Current Time"
