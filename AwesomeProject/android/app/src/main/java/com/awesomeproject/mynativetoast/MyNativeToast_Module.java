@@ -1,10 +1,15 @@
 package com.awesomeproject.mynativetoast;
 
+import android.util.Log;
 import android.widget.Toast;
 import com.facebook.react.bridge.*;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by nazmul on 7/10/16.
@@ -16,9 +21,47 @@ public class MyNativeToast_Module extends ReactContextBaseJavaModule {
  */
 private static final String KEY_SHORT = "SHORT";
 private static final String KEY_LONG  = "LONG";
+private static final String TAG       = "MyNativeToast";
 
-public MyNativeToast_Module(ReactApplicationContext reactContext) {
+
+ScheduledExecutorService executor;
+
+@Override
+public void onCatalystInstanceDestroy() {
+  super.onCatalystInstanceDestroy();
+  if (executor != null) executor.shutdown();
+  Log.i(TAG, "onCatalystInstanceDestroy: shutting down executor");
+}
+
+public MyNativeToast_Module(final ReactApplicationContext reactContext) {
   super(reactContext);
+
+  // create an executor to send events to the JS client
+  Runnable task = new Runnable() {
+    @Override
+    public void run() {
+
+      try {
+        String eventName = "MyNativeToast";
+        WritableMap params = Arguments.createMap();
+        params.putString("number", String.valueOf(Math.random()));
+
+        reactContext
+          .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+          .emit(eventName, params);
+
+      } catch (Exception e) {
+        Log.e(TAG, "MyNativeToast_Module: task having problems", e);
+      }
+
+      Log.i(TAG, "MyNativeToast_Module: firing event to JS");
+
+    }
+  };
+  executor = Executors.newSingleThreadScheduledExecutor();
+  executor.scheduleWithFixedDelay(task, 1, 5, TimeUnit.SECONDS);
+  Log.i(TAG, "MyNativeToast_Module: starting executor");
+
 }
 
 /**

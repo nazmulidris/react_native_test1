@@ -6,7 +6,7 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry, StyleSheet, Text, View, Image, TextInput, Dimensions, ScrollView
+    AppRegistry, StyleSheet, Text, View, Image, TextInput, Dimensions, ScrollView, DeviceEventEmitter
 } from 'react-native';
 /** import the native android component from JS module wrapping it */
 import MyNativeToast from './MyNativeToast_Module';
@@ -45,6 +45,11 @@ class AwesomeProject extends Component {
      */
     componentWillMount() {
         this.updateTime();
+        DeviceEventEmitter.addListener("MyNativeToast", this.eventRcvdFromNative.bind(this));
+    }
+
+    eventRcvdFromNative(e:Event) {
+        this.setState({debug_txt: "Evt from Android: " + e.number});
     }
 
     /** set a recurring timer to update the time state string */
