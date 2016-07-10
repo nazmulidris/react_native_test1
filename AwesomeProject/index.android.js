@@ -21,7 +21,7 @@ class AwesomeProject extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            img_url: "https://goo.gl/vRNu5m",
+            img_url: images.jarvis_image,
             time_str: "Current Time",
             text_str: "User Input",
         };
@@ -33,7 +33,7 @@ class AwesomeProject extends Component {
     }
 
     updateTime() {
-        let dateFormat = require('dateformat')
+        let dateFormat = require('dateformat');
         let formattedDate = dateFormat(Date.now(), "dddd, mmmm dS, yyyy, h:MM:ss TT");
         this.setState({time_str: formattedDate});
     }
@@ -86,10 +86,28 @@ class AwesomeProject extends Component {
     }
 
     buttonPressed() {
-        this.updateImageURI("https://goo.gl/B94hp8");
-        MyNativeToast.show("YAY! Button is pressed!", MyNativeToast.LONG);
+        let imgURL = images.naz_image;
+        let randNum = Math.floor((Math.random() * 10) + 1);
+        if (randNum >= 7) {
+            imgURL = images.naz_image;
+        }
+        else if (randNum >= 3) {
+            imgURL = images.cayman_image
+        }
+        else if (randNum >= 0) {
+            imgURL = images.ironman_image;
+        }
+        this.updateImageURI(imgURL);
+        MyNativeToast.show("Button is pressed, loading random image: " + imgURL, MyNativeToast.SHORT);
     }
 }
+
+const images = {
+    jarvis_image: '@drawable/jarvis', // this image is loaded from android/res
+    ironman_image: '@drawable/ironman', // this image is loaded from android/res
+    naz_image: "https://goo.gl/vRNu5m", // this image is loaded from URI that's been shortened!
+    cayman_image: "https://goo.gl/B94hp8", // this image is loaded from URI that's been shortened!
+};
 
 const styles = StyleSheet.create({
     textinput: {
