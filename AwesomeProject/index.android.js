@@ -49,11 +49,6 @@ class AppEntryPoint extends Component {
      */
     componentWillMount() {
         this.updateTime();
-        DeviceEventEmitter.addListener("MyNativeToast", this.eventRcvdFromNative.bind(this));
-    }
-
-    eventRcvdFromNative(e:Event) {
-        this.setState({debug_txt: "Evt from Android: " + e.number});
     }
 
     /** set a recurring timer to update the time state string */

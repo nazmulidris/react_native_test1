@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
-import {ListView, Text, View, StyleSheet} from 'react-native';
+import {ListView, Text, View, StyleSheet, DeviceEventEmitter} from 'react-native';
+
+/**
+ * ListView example: https://rnplay.org/apps/GWoFWg
+ * ListViewDataSource docs: https://facebook.github.io/react-native/docs/listviewdatasource.html
+ */
 
 class MyListView extends Component {
 
     constructor(props) {
         super(props);
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSource: ds.cloneWithRows([
-                'John', 'Joel', 'James', 'Jimmy', 'Jackson', 'Jillian', 'Julie', 'Devin'
-            ])
+            msgRay: [],
+            dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
         };
     }
 
@@ -23,6 +26,23 @@ class MyListView extends Component {
             </View>
         );
     }
+
+    componentWillMount() {
+        DeviceEventEmitter.addListener("MyNativeToast", this.eventRcvdFromNative.bind(this));
+    }
+
+    eventRcvdFromNative(e:Event) {
+        let msg = "Evt from Android: " + e.number;
+
+        let msgRay = this.state.msgRay;
+        let dataSrc = this.state.dataSource;
+
+        msgRay.push(msg);
+        this.setState({
+            dataSource: dataSrc.cloneWithRows(msgRay)
+        });
+    }
+
 }
 
 const styles = StyleSheet.create({
