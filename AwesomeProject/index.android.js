@@ -74,7 +74,7 @@ class AppEntryPoint extends Component {
                         containerStyle={styles.buttonContainer}
                         style={styles.button}
                         onPress={this.buttonPressed.bind(this)}>
-                        Press Me!
+                        Press Me Now!
                     </Button>
                     <TextInput
                         style={styles.textinput}
@@ -140,8 +140,8 @@ class AppEntryPoint extends Component {
                 MyNativeToast.show_callbacks(
                     _message,
                     MyNativeToast.SHORT,
-                    (msg)=>this.setState({debug_txt: msg}),
-                    (e)=>this.setState({debug_txt: e}));
+                    (err)=>this.setState({debug_txt: err}),  // error callback
+                    (msg)=>this.setState({debug_txt: msg})); // success callback
             }
                 break;
             case 2:// promise
