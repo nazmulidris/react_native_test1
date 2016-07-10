@@ -20,7 +20,7 @@ import Button from 'react-native-button';
 
 import {ListView} from './MyListView';
 
-class AwesomeProject extends Component {
+class AppEntryPoint extends Component {
 
     constructor(props) {
         super(props);
@@ -169,7 +169,7 @@ class AwesomeProject extends Component {
 
     }// end buttonPresssed()
 
-}// end class AwesomeProject
+}// end class AppEntryPoint
 
 const images = {
     jarvis_image: '@drawable/jarvis', // this image is loaded from android/res
@@ -221,4 +221,4 @@ const styles = StyleSheet.create({
     },
 });
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+AppRegistry.registerComponent('Jarvis', () => AppEntryPoint);
