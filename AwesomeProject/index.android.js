@@ -5,9 +5,11 @@
  */
 
 import React, {Component} from 'react';
+
 import {
     AppRegistry, StyleSheet, Text, View, Image, TextInput, Dimensions, ScrollView, DeviceEventEmitter
 } from 'react-native';
+
 /** import the native android component from JS module wrapping it */
 import MyNativeToast from './MyNativeToast_Module';
 
@@ -15,6 +17,8 @@ import MyNativeToast from './MyNativeToast_Module';
  * http://stackoverflow.com/questions/29872918/how-to-add-a-button-in-react-native
  */
 import Button from 'react-native-button';
+
+import {ListView} from './MyListView';
 
 class AwesomeProject extends Component {
 
