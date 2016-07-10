@@ -6,7 +6,7 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry, StyleSheet, Text, View, ToastAndroid, Image
+    AppRegistry, StyleSheet, Text, View, ToastAndroid, Image, TextInput, Dimensions, ScrollView
 } from 'react-native';
 
 /**
@@ -21,7 +21,8 @@ class AwesomeProject extends Component {
         super(props);
         this.state = {
             img_url: "https://goo.gl/vRNu5m",
-            time_str: "Current Time"
+            time_str: "Current Time",
+            text_str: "User Input"
         };
         this.updateImageURI = this.updateImageURI.bind(this);
     }
@@ -57,21 +58,29 @@ class AwesomeProject extends Component {
     render() {
 
         return (
-            <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    {this.state.time_str}
-                </Text>
-                <Image source={{uri: this.state.img_url}} style={styles.image}/>
-                <Button
-                    containerStyle={styles.buttonContainer}
-                    style={styles.button}
-                    onPress={this.buttonPressed.bind(this)}>
-                    Press Me!
-                </Button>
-                <Text style={[{flex:1},styles.instructions]}>
-                    To get started, edit index.android.js. Shake or press menu button for dev menu
-                </Text>
-            </View>
+            <ScrollView>
+                <View style={styles.container}>
+                    <Text style={styles.welcome}>
+                        {this.state.time_str}
+                    </Text>
+                    <Image source={{uri: this.state.img_url}} style={styles.image}/>
+                    <Button
+                        containerStyle={styles.buttonContainer}
+                        style={styles.button}
+                        onPress={this.buttonPressed.bind(this)}>
+                        Press Me!
+                    </Button>
+                    <TextInput
+                        style={styles.textinput}
+                        placeholder="Type something here"
+                        onChangeText={(text)=>this.setState({text_str:text})}
+                    />
+                    <Text style={styles.instructions}>
+                        You typed: '{this.state.text_str}'. To get started,
+                        edit index.android.js. Shake or press menu button for dev menu
+                    </Text>
+                </View>
+            </ScrollView>
         );
     }
 
@@ -82,10 +91,15 @@ class AwesomeProject extends Component {
 }
 
 const styles = StyleSheet.create({
+    textinput: {
+        // width: Dimensions.get('window').width,
+        alignSelf: 'stretch',
+        margin: 24,
+    },
     image: {
         margin: 24,
-        width: 150,
-        height: 150,
+        width: 300,
+        height: 300,
     },
     buttonContainer: {
         padding: 10,
@@ -110,6 +124,7 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     instructions: {
+        flex: 1,
         marginTop: 24,
         textAlign: 'center',
         color: '#333333',
