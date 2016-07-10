@@ -54,10 +54,7 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" assert-keyword="false" jdk-15="false" project-jdk-name="Java" project-jdk-type="JavaSDK" />
-  <component name="SvnConfiguration">
-    <configuration>$USER_HOME$/.subversion</configuration>
-  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Java" project-jdk-type="JavaSDK" />
   <component name="masterDetails">
     <states>
       <state key="GlobalLibrariesConfigurable.UI">

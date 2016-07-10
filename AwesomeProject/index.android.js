@@ -6,14 +6,15 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry, StyleSheet, Text, View, ToastAndroid, Image, TextInput, Dimensions, ScrollView
+    AppRegistry, StyleSheet, Text, View, Image, TextInput, Dimensions, ScrollView
 } from 'react-native';
+/** import the native android component from JS module wrapping it */
+import MyNativeToast from './MyNativeToast_Module';
 
 /**
  * http://stackoverflow.com/questions/29872918/how-to-add-a-button-in-react-native
  */
 import Button from 'react-native-button';
-
 
 class AwesomeProject extends Component {
 
@@ -22,7 +23,7 @@ class AwesomeProject extends Component {
         this.state = {
             img_url: "https://goo.gl/vRNu5m",
             time_str: "Current Time",
-            text_str: "User Input"
+            text_str: "User Input",
         };
         this.updateImageURI = this.updateImageURI.bind(this);
     }
@@ -86,7 +87,7 @@ class AwesomeProject extends Component {
 
     buttonPressed() {
         this.updateImageURI("https://goo.gl/B94hp8");
-        ToastAndroid.show("YAY! Button is pressed!", ToastAndroid.LONG);
+        MyNativeToast.show("YAY! Button is pressed!", MyNativeToast.LONG);
     }
 }
 

@@ -1,6 +1,7 @@
 package com.awesomeproject;
 
 import android.app.Application;
+import com.awesomeproject.mynativetoast.MyNativeToast_Package;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -17,11 +18,14 @@ private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     return BuildConfig.DEBUG;
   }
 
+  /**
+   * this adds the {@link MyNativeToast_Package} so that the module i added is
+   * available to JS
+   */
   @Override
   protected List<ReactPackage> getPackages() {
-    return Arrays.<ReactPackage>asList(
-      new MainReactPackage()
-                                      );
+    return Arrays.asList(new MainReactPackage(),
+                         new MyNativeToast_Package());
   }
 };
 
