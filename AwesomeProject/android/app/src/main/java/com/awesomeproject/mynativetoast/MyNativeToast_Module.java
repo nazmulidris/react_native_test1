@@ -1,9 +1,7 @@
 package com.awesomeproject.mynativetoast;
 
 import android.widget.Toast;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +52,7 @@ public Map<String, Object> getConstants() {
 }
 
 /**
+ * NOTE - each @ReactMethod must have a unique name (not method signature).
  * this is the method that's exposed to JS.
  * To expose a method to JavaScript a Java method must be annotated
  * using @ReactMethod. The return type of bridge methods is always void.
@@ -78,4 +77,43 @@ public void show(String message, int duration) {
   Toast.makeText(getReactApplicationContext(), message, duration).show();
 }
 
+/**
+ * NOTE - each @ReactMethod must have a unique name (not method signature).
+ * this is the method that's exposed to JS.
+ *
+ * @param message
+ * @param duration
+ * @param errorCallback
+ * @param successCallback
+ */
+@ReactMethod
+public void show_callbacks(String message, int duration, Callback errorCallback, Callback successCallback) {
+  try {
+    Toast.makeText(getReactApplicationContext(), message, duration).show();
+    successCallback.invoke("Native toast worked (callbacks)!");
+  } catch (Exception e) {
+    errorCallback.invoke(e);
+  }
+
 }
+
+/**
+ * NOTE - each @ReactMethod must have a unique name (not method signature).
+ * this is the method that's exposed to JS.
+ *
+ * @param message
+ * @param duration
+ * @param promise
+ */
+@ReactMethod
+public void show_promise(String message, int duration, Promise promise) {
+  try {
+    Toast.makeText(getReactApplicationContext(), message, duration).show();
+    promise.resolve("Native toast worked (promise)!");
+  } catch (Exception e) {
+    promise.reject(e);
+  }
+
+}
+
+}// end class

@@ -24,6 +24,7 @@ class AwesomeProject extends Component {
             img_url: images.jarvis_image,
             time_str: "Current Time",
             text_str: "User Input",
+            debug_txt: "N/A",
         };
         this.updateImageURI = this.updateImageURI.bind(this);
     }
@@ -76,6 +77,9 @@ class AwesomeProject extends Component {
                         placeholder="Type something here"
                         onChangeText={(text)=>this.setState({text_str:text})}
                     />
+                    <Text style={styles.welcome}>
+                        {this.state.debug_txt}
+                    </Text>
                     <Text style={styles.instructions}>
                         You typed: '{this.state.text_str}'. To get started,
                         edit index.android.js. Shake or press menu button for dev menu
@@ -85,22 +89,78 @@ class AwesomeProject extends Component {
         );
     }
 
+    _message;
+
     buttonPressed() {
+
+        let path = 0;
         let imgURL = images.naz_image;
         let randNum = Math.floor((Math.random() * 10) + 1);
+
         if (randNum >= 7) {
-            imgURL = images.naz_image;
+            path = 0;
         }
         else if (randNum >= 3) {
-            imgURL = images.cayman_image
+            path = 1;
         }
         else if (randNum >= 0) {
-            imgURL = images.ironman_image;
+            path = 2;
         }
+
+        switch (path) {
+            case 0:
+                imgURL = images.naz_image;
+                break;
+            case 1:
+                imgURL = images.cayman_image
+                break;
+            case 2:
+                imgURL = images.ironman_image;
+                break;
+        }
+
         this.updateImageURI(imgURL);
-        MyNativeToast.show("Button is pressed, loading random image: " + imgURL, MyNativeToast.SHORT);
-    }
-}
+        let _message = "Button is pressed, loading random image: " + imgURL;
+
+
+        switch (path) {
+            case 0:// simple
+            {
+                MyNativeToast.show(_message, MyNativeToast.SHORT);
+                this.setState({debug_txt: "Native toast worked (simple)!"})
+            }
+                break;
+            case 1:// callbacks
+            {
+                MyNativeToast.show_callbacks(
+                    _message,
+                    MyNativeToast.SHORT,
+                    (msg)=>this.setState({debug_txt: msg}),
+                    (e)=>this.setState({debug_txt: e}));
+            }
+                break;
+            case 2:// promise
+            {
+                async function call_show() {
+                    try {
+                        var msg = await MyNativeToast.show_promise(_message, MyNativeToast.SHORT);
+                        this.setState({debug_txt: msg});
+
+                    } catch (e) {
+                        this.setState({debug_txt: e});
+                    }
+                }
+
+                // fucking javascript bullshit!
+                call_show = call_show.bind(this);
+                call_show();
+            }
+                break;
+        }
+
+    }// end buttonPresssed()
+
+}// end class AwesomeProject
 
 const images = {
     jarvis_image: '@drawable/jarvis', // this image is loaded from android/res
