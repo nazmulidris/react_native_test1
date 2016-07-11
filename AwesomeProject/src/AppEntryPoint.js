@@ -13,6 +13,7 @@ import MyNativeToast from './MyNativeToast_Module';
 import Button from 'react-native-button';
 
 import {MyListView} from './MyListView';
+import {MyListView2} from './MyListView2';
 
 class AppEntryPoint extends Component {
 
@@ -79,6 +80,7 @@ class AppEntryPoint extends Component {
                         {this.state.debug_txt}
                     </Text>
                     <MyListView></MyListView>
+                    <MyListView2></MyListView2>
                     <Text style={styles.instructions}>
                         You typed: '{this.state.text_str}'. To get started,
                         edit index.android.js. Shake or press menu button for dev menu
