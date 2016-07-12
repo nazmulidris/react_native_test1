@@ -36,8 +36,8 @@ class MyListView2 extends Component {
             MyNativeToast.show("Making network call to fetch json data", MyNativeToast.SHORT);
             let response = await fetch('http://facebook.github.io/react-native/movies.json');
             MyNativeToast.show("Got json data from network", MyNativeToast.SHORT);
-            let responseJson = await response.json();
-            this.updateListViewWithData(responseJson);
+            let jsonObject = await response.json();
+            this.updateListViewWithData(jsonObject);
         } catch (error) {
             MyNativeToast.show(error, MyNativeToast.LONG);
         }
