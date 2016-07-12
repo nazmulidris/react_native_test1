@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "adb reverse tcp:8081 tcp:8081 && node node_modules/react-native/local-cli/cli.js start"
+    "start": "adb reverse tcp:8081 tcp:8081 && node node_modules/react-native/local-cli/cli.js start",
+    "adb": "adb reverse tcp:8081 tcp:8081"
   },
   "dependencies": {
     "dateformat": "^1.0.12",
